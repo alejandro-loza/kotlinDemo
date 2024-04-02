@@ -3,6 +3,7 @@ package com.example.demo.controller
 import com.example.demo.repository.Persona
 import com.example.demo.repository.PersonaRepository
 import org.springframework.data.crossstore.ChangeSetPersister
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -32,6 +33,14 @@ class PersonaController(
         return personaRepository.save(personaToUpdate.copy(nombre = persona.nombre, edad = persona.edad))
     }
 
-    @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Long) = personaRepository.deleteById(id)
+     @DeleteMapping("/api/personas/{id}")
+    fun delete(@PathVariable id: Long): ResponseEntity<Void> {
+        return if (personaRepository.existsById(id)) {
+            personaRepository.deleteById(id)
+            ResponseEntity.ok().build()
+        } else {
+            ResponseEntity.notFound().build()
+        }
+    }
+
 }
