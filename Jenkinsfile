@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GRADLE_HOME = tool 'gradle-7.3.3'
+        GRADLE_HOME = tool 'gradle-8.5'
         PATH = "$GRADLE_HOME/bin:$PATH"
     }
 
