@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Compilar el proyecto con Gradle
+                    // Compilar el proyecto con Gradle y generar el archivo JAR
                     sh 'gradle clean build'
                 }
             }
